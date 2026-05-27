@@ -1,0 +1,24 @@
+import bpy
+
+# ブレンダーに登録するアドオン情報
+bl_info = {
+    "name": "レベルエディタ",
+    "autor": "yuu takagi",
+    "version": (1,0),
+    "blender": (3,3,1),
+    "location": "",
+    "description": "レベルエディタ",
+    "warning": "",
+    "wiki_url": "",
+    "tracker_url": "",
+    "category": "Object"
+}
+
+# アドオン有効化時コールバック
+def register():
+    print("レベルエディタが有効化されました。")
+
+# アドオン無効化時コールバック
+def unregister():
+    print("レベルエディタが無効化されました。")
+    
