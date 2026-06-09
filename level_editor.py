@@ -15,27 +15,25 @@ bl_info = {
     "category": "Object"
 }
 
-# メニュー項目描画
-def draw_menu_manual(self,context):
-    #self : 呼び出し元のクラスインスタンス。C++でいうとthisポインタ
-    #context : カーソルを合わせた時のポップアップのカスタマイズなどに使用
-
-    #トップバーの「エディターメニュー」に項目(オペレータ)を追加
-    self.layout.operator("wm.url_open_preset",text="Manual",icon='HELP')
-
 # アドオン有効化時コールバック
 def register():
     for cls in classes:
         bpy.utils.register_class(cls)
-    bpy.types.TOPBAR_MT_editor_menus.append(TOPBER_MT_my_menu.submenu)
+
+    bpy.types.TOPBAR_MT_editor_menus.append(TOPBAR_MT_my_menu.submenu)
+
     print("レベルエディタが有効化されました。")
 
 # アドオン無効化時コールバック
 def unregister():
-    bpy.types.TOPBAR_MT_editor_menus.remove(draw_menu_manual)
+    bpy.types.TOPBAR_MT_editor_menus.remove(TOPBAR_MT_my_menu.submenu)
+
+    for cls in classes:
+        bpy.utils.unregister_class(cls)
+
     print("レベルエディタが無効化されました。")
     
-class TOPBER_MT_my_menu(bpy.types.Menu):
+class TOPBAR_MT_my_menu(bpy.types.Menu):
     bl_idname = "TOPBAR_MT_my_menu"
     bl_label = "MyMenu"
     bl_description = "拡張メニュー by " + bl_info["author"]
@@ -44,6 +42,6 @@ class TOPBER_MT_my_menu(bpy.types.Menu):
         self.layout.operator("wm.url_open_preset",text="Manual",icon='HELP')
 
     def submenu(self,context):
-        self.layout.menu(TOPBER_MT_my_menu.bl_idname)
+        self.layout.menu(TOPBAR_MT_my_menu.bl_idname)
 
-clases =(TOPBER_MT_my_menu,)
+classes =(TOPBAR_MT_my_menu,)
