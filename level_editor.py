@@ -354,7 +354,7 @@ class OBJECT_PT_collider(bpy.types.Panel):
             self.layout.prop(context.object, '["collider_size"]', text = "Size")
         else:
             #プロパティがなければ、プロパティ追加ボタンを表示
-            self.layout.operator(OBJECT_PT_collider.bl_idname)
+            self.layout.operator(MYADDON_OT_add_collider.bl_idname)
 
 classes =(
     MYADDON_OT_export_scene,
